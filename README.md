@@ -22,7 +22,7 @@ $player->sendForm($form);
 Creating a form with a button with an icon:
 ```php
 $form = new SimpleForm("This is the title");
-$form->addButton(new Button("Press me!", new ButtonIcon("https://introduce-the-image-url.here"), function(Player $player) {
+$form->addButton(new Button("Press me!", Icons::PlayerIcon(), function(Player $player) {
     $player->sendMessage("Hey! Thanks for pressing me :)");
 }));
 $player->sendForm($form);
@@ -101,8 +101,13 @@ class ExampleForm extends SimpleForm {
     }
 
     protected function onCreation(): void {
-        $button = new Button("A very very big button");
-        $button->setIcon(new ButtonIcon("https://a-cool-url.i.think"));
+        $button1 = new Button("A very very big button 1");
+        $button2 = new Button("A very very big button 2");
+        $button3 = new Button("A very very big button 3");
+        $button1->setIcon(Icons::CheckmarkIcon());
+        $button2->setIcon(Icons::URLIcon("https://a-cool-url.i.think"));
+        $button3->setIcon(Icons::CustomIcon("Icon Link", Icons::TYPE_PATH)); # Icons::TYPE_PATH and Icons::TYPE_URL
+
         $button->setSubmitListener(function(Player $player) {
             $player->sendMessage("Making this form was so easy!");
         });
